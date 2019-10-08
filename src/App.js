@@ -96,11 +96,12 @@ const encode = (data) => {
           
         
         <div style = {submitFormStyle}>
-                <label>
+                <form name= "cool form" onSubmit={(e) => this.onSubmit(e)}>
+                  <label>
                     Have a great Idea?
-                </label>
-                <input type= 'text' value= {this.state.name} name= 'name' placeholder= 'Your Name' onChange= {(e)=>this.handleChange(e)}></input>
-                <form onSubmit={(e) => this.onSubmit(e)}>
+                  </label>
+                  <input type= 'text' value= {this.state.name} name= 'name' placeholder= 'Your Name' onChange= {(e)=>this.handleChange(e)}></input>
+                
                     <textarea rows= "20" cols = "80" name= 'idea' value= {this.state.idea} id="submittedIdea" type="text" placeholder="Enter your idea here" onChange= {(e)=>this.handleChange(e)}></textarea><br></br>
                     <button type="submit">Submit</button>
                 </form>
@@ -110,4 +111,25 @@ const encode = (data) => {
       );
     }
   }
+
+//   <form name="contact" method="POST" data-netlify="true">
+//   <p>
+//     <label>Your Name: <input type="text" name="name" /></label>   
+//   </p>
+//   <p>
+//     <label>Your Email: <input type="email" name="email" /></label>
+//   </p>
+//   <p>
+//     <label>Your Role: <select name="role[]" multiple>
+//       <option value="leader">Leader</option>
+//       <option value="follower">Follower</option>
+//     </select></label>
+//   </p>
+//   <p>
+//     <label>Message: <textarea name="message"></textarea></label>
+//   </p>
+//   <p>
+//     <button type="submit">Send</button>
+//   </p>
+// </form>
 
