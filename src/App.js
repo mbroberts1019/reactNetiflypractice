@@ -36,12 +36,14 @@ function Home() {
 function Form() {
   return (
     <div>
+      <Banner/>
       <IdeaForm/>
     </div>
   );
 }
 
 const submitFormStyle = {padding: '20px'};
+const bannerStyle = {color: 'purple'};
 
 const encode = (data) => {
     return Object.keys(data)
@@ -49,7 +51,18 @@ const encode = (data) => {
         .join("&");
   };
 
- class IdeaForm extends React.Component {
+ 
+  class Banner extends React.Component{
+
+    render(){
+      return(
+        <div style= {bannerStyle}>I Make Good Forms!!!</div>
+      );
+    }
+
+  }
+ 
+  class IdeaForm extends React.Component {
     constructor(props) {
       super(props);
       this.state = {name: '', idea: ''};
@@ -73,17 +86,20 @@ const encode = (data) => {
     }
   
     onSubmit(event) {
-      alert('An idea was submitted: ' + this.state.value);
+      alert( this.state.name + ' has an idea: ' + this.state.idea);
       event.preventDefault();
     }
   
     render() {
       return (
+        
+          
+        
         <div style = {submitFormStyle}>
                 <label>
                     Have a great Idea?
                 </label>
-                <input type= 'text' value= {this.state.name} name= 'name' placeholder= 'Your Name'></input>
+                <input type= 'text' value= {this.state.name} name= 'name' placeholder= 'Your Name' onChange= {(e)=>this.handleChange(e)}></input>
                 <form onSubmit={(e) => this.onSubmit(e)}>
                     <textarea rows= "20" cols = "80" name= 'idea' value= {this.state.idea} id="submittedIdea" type="text" placeholder="Enter your idea here" onChange= {(e)=>this.handleChange(e)}></textarea><br></br>
                     <button type="submit">Submit</button>
