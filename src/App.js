@@ -96,7 +96,7 @@ const encode = (data) => {
           
         
         <div style = {submitFormStyle}>
-                <form name= "cool form" onSubmit={(e) => this.onSubmit(e)}>
+                <form name= "cool form" onSubmit={(e) => this.onSubmit(e)} data-netlify="true">
                   <label>
                     Have a great Idea?
                   </label>
