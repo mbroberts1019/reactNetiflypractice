@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import NetlifyForm from 'react-netlify-form';
 
 export default function NetiflyFormExample() {
   return (
@@ -94,18 +95,41 @@ const encode = (data) => {
       return (
         
           
-        
-        <div style = {submitFormStyle}>
-                <form name= "cool form" onSubmit={(e) => this.onSubmit(e)} data-netlify="true">
-                  <label>
-                    Have a great Idea?
-                  </label>
-                  <input type= 'text' value= {this.state.name} name= 'name' placeholder= 'Your Name' onChange= {(e)=>this.handleChange(e)}></input>
+        <NetlifyForm name='Contact Form'>
+        {({ loading, error, success }) => (
+        <div>
+            {loading &&
+        <div>Loading...</div>
+          }
+         {error &&
+            <div>Your information was not sent. Please try again later.</div>
+          }
+          {success &&
+              <div>Thank you for contacting us!</div>
+            }
+            {!loading && !success &&
+              <div>
+             <input type='text' name='Name' required />
+             <textarea name='Message' required />
+             <button>Submit</button>
+          </div>
+        }
+      </div>
+        )}
+        </NetlifyForm>
+
+
+        // <div style = {submitFormStyle}>
+        //         <form name= "cool form" onSubmit={(e) => this.onSubmit(e)} data-netlify="true">
+        //           <label>
+        //             Have a great Idea?
+        //           </label>
+        //           <input type= 'text' value= {this.state.name} name= 'name' placeholder= 'Your Name' onChange= {(e)=>this.handleChange(e)}></input>
                 
-                    <textarea rows= "20" cols = "80" name= 'idea' value= {this.state.idea} id="submittedIdea" type="text" placeholder="Enter your idea here" onChange= {(e)=>this.handleChange(e)}></textarea><br></br>
-                    <button type="submit">Submit</button>
-                </form>
-        </div>
+        //             <textarea rows= "20" cols = "80" name= 'idea' value= {this.state.idea} id="submittedIdea" type="text" placeholder="Enter your idea here" onChange= {(e)=>this.handleChange(e)}></textarea><br></br>
+        //             <button type="submit">Submit</button>
+        //         </form>
+        // </div>
            
     
       );
