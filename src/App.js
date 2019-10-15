@@ -50,7 +50,7 @@ const encode = (data) => {
     return Object.keys(data)
         .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
         .join("&");
-  };
+};
 
  
   class Banner extends React.Component{
@@ -87,73 +87,30 @@ const encode = (data) => {
     }
   
     onSubmit(event) {
-      alert( this.state.name + ' has an idea: ' + this.state.idea);
+      alert( this.state.name + ' @ '+ this.state.email  +' has an idea: ' + this.state.idea);
       event.preventDefault();
     }
   
     render() {
       return (
-        
-          
-        <NetlifyForm name='Contact Form'>
-        {({ loading, error, success }) => (
-        <div>
-            {loading &&
-        <div>Loading...</div>
-          }
-         {error &&
-            <div>Your information was not sent. Please try again later.</div>
-          }
-          {success &&
-              <div>Thank you for contacting us!</div>
-            }
-            {!loading && !success &&
-              <div>
-             <input type='text' name='Name' required />
-             <textarea name='Message' required />
-             <button>Submit</button>
-          </div>
-        }
-      </div>
-        )}
-        </NetlifyForm>
 
-
-        // <div style = {submitFormStyle}>
-        //         <form name= "cool form" onSubmit={(e) => this.onSubmit(e)} data-netlify="true">
-        //           <label>
-        //             Have a great Idea?
-        //           </label>
-        //           <input type= 'text' value= {this.state.name} name= 'name' placeholder= 'Your Name' onChange= {(e)=>this.handleChange(e)}></input>
+        <div style = {submitFormStyle}>
+                <form name= "cool form" onSubmit={(e) => this.onSubmit(e)} >
+                  <label>
+                    Have a great Idea?
+                  </label><br/>
+                  <input type= 'text' value= {this.state.name} name= 'name' placeholder= 'Your Name' onChange= {(e)=>this.handleChange(e)}></input> <br/>
+                  <input type= 'text' value= {this.state.email} name= 'email' placeholder= 'awesomeperson@email.com' onChange= {(e)=>this.handleChange(e)}></input><br/>
                 
-        //             <textarea rows= "20" cols = "80" name= 'idea' value= {this.state.idea} id="submittedIdea" type="text" placeholder="Enter your idea here" onChange= {(e)=>this.handleChange(e)}></textarea><br></br>
-        //             <button type="submit">Submit</button>
-        //         </form>
-        // </div>
+                    <textarea rows= "20" cols = "80" name= 'idea' value= {this.state.idea} id="submittedIdea" type="text" placeholder="Enter your idea here" onChange= {(e)=>this.handleChange(e)}></textarea><br></br>
+                    <button type="submit">Submit</button>
+                </form>
+        </div>
            
     
       );
     }
   }
 
-//   <form name="contact" method="POST" data-netlify="true">
-//   <p>
-//     <label>Your Name: <input type="text" name="name" /></label>   
-//   </p>
-//   <p>
-//     <label>Your Email: <input type="email" name="email" /></label>
-//   </p>
-//   <p>
-//     <label>Your Role: <select name="role[]" multiple>
-//       <option value="leader">Leader</option>
-//       <option value="follower">Follower</option>
-//     </select></label>
-//   </p>
-//   <p>
-//     <label>Message: <textarea name="message"></textarea></label>
-//   </p>
-//   <p>
-//     <button type="submit">Send</button>
-//   </p>
-// </form>
+
 
