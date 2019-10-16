@@ -93,8 +93,7 @@ const encode = (data) => {
         method: 'POST',
         headers: {
           "Access-Control-Allow-Origin" : "*",
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/x-www-form-urlencoded',
         },
         body: JSON.stringify({
           email: `${this.state.email}`,
