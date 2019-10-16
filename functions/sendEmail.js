@@ -102,8 +102,10 @@ function sendIdea(event, context, callback) {
   if (!params["email"]) errs.push("no-email");
   if (!params["idea"]) errs.push("no-idea");
   console.log(errs);
-  if (errs.length > 0) return redir(callback, errs.join(","));
-
+  //if (errs.length > 0) return redir(callback, errs.join(","));
+  console.log(params['name']);
+  console.log(params.name);
+  
   sendEmail(
     params["name"],  
     params["email"],
