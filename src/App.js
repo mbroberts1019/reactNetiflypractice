@@ -98,7 +98,7 @@ const encode = (data) => {
         body: JSON.stringify({
           email: `${this.state.email}`,
           name: `${this.state.name}`,
-          idea: `${this.state.email}`
+          idea: `${this.state.idea}`
           })
         })
       

@@ -75,6 +75,7 @@ function redir(callback, code) {
 function sendIdea(event, context, callback) {
   console.log("hitSendIdea function");
   console.log(event["headers"]);
+  console.log(event["body"]);
   if (event["httpMethod"] !== "POST") {
     return callback(
       new Error(`Unexpected HTTP method "${event["httpMethod"]}"`)
@@ -94,11 +95,13 @@ function sendIdea(event, context, callback) {
 //     console.info("Bot trapped in honeypot")
 //     return callback()
 //   }
-
+  console.log(params);  
   const errs = [];
+  console.log('HIt errors section')
   if (!params["name"]) errs.push("no-name");
   if (!params["email"]) errs.push("no-email");
   if (!params["idea"]) errs.push("no-idea");
+  console.log(errs);
   if (errs.length > 0) return redir(callback, errs.join(","));
 
   sendEmail(
