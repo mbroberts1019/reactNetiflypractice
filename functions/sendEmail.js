@@ -73,6 +73,8 @@ function redir(callback, code) {
  * @param {!NetlifyCallback} callback
  */
 function sendIdea(event, context, callback) {
+  console.log("hitSendIdea function");
+  console.log(event["headers"]);
   if (event["httpMethod"] !== "POST") {
     return callback(
       new Error(`Unexpected HTTP method "${event["httpMethod"]}"`)
@@ -115,6 +117,8 @@ function sendIdea(event, context, callback) {
  * @param {!NetlifyCallback} callback
  */
 function sendEmail(name, replyTo, text, callback) {
+  console.log("Hit Email Function");
+  console.log('Email has env?'+ process.env["IDEA_FORM_FROM"] )
   ses.sendEmail({
     Source: process.env["IDEA_FORM_FROM"],
     Destination: {
