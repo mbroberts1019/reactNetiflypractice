@@ -74,7 +74,7 @@ function redir(callback, code) {
  */
 function sendIdea(event, context, callback) {
   console.log("hitSendIdea function");
-  console.log(event["headers"]);
+  //console.log(event["headers"]);
   console.log(event["body"]);
   if (event["httpMethod"] !== "POST") {
     return callback(
@@ -88,7 +88,7 @@ function sendIdea(event, context, callback) {
     );
   }
 
-  const params = event["body"];
+  const params = JSON.parse(event["body"]);
 
 //   if (process.env["QUESTION_FORM_HONEYPOT"] &&
 //       params[process.env["QUESTION_FORM_HONEYPOT"]]) {
