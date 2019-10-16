@@ -88,7 +88,7 @@ function sendIdea(event, context, callback) {
     );
   }
 
-  const params = querystring.parse(event["body"]);
+  const params = event["body"];
 
 //   if (process.env["QUESTION_FORM_HONEYPOT"] &&
 //       params[process.env["QUESTION_FORM_HONEYPOT"]]) {
