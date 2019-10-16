@@ -69,17 +69,17 @@ const encode = (data) => {
       this.state = {name: '', idea: ''};
     }
   
-    handleSubmit(e) {
-        fetch("/", {
-          method: "POST",
-          headers: { "Content-Type": "application/x-www-form-urlencoded" },
-          body: encode({ "form-name": "submission", ...this.state.idea })
-        })
-          .then(() => alert("Success!"))
-          .catch(error => alert(error));
+    // handleSubmit(e) {
+    //     fetch("/", {
+    //       method: "POST",
+    //       headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    //       body: encode({ "form-name": "submission", ...this.state.idea })
+    //     })
+    //       .then(() => alert("Success!"))
+    //       .catch(error => alert(error));
   
-        e.preventDefault();
-      }
+    //     e.preventDefault();
+    //   }
     
     
     handleChange(event) {
@@ -88,7 +88,23 @@ const encode = (data) => {
   
     onSubmit(event) {
       alert( this.state.name + ' @ '+ this.state.email  +' has an idea: ' + this.state.idea);
-      event.preventDefault();
+      
+      fetch('http://localhost:9000/.netlify/functions/sendEmail', {
+        method: 'POST',
+        headers: {
+          "Access-Control-Allow-Origin" : "*",
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: `${this.state.email}`,
+          name: `${this.state.name}`,
+          idea: `${this.state.email}`
+          })
+        })
+      
+      
+        event.preventDefault();
     }
   
     render() {
