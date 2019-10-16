@@ -89,7 +89,7 @@ const encode = (data) => {
     onSubmit(event) {
       alert( this.state.name + ' @ '+ this.state.email  +' has an idea: ' + this.state.idea);
       
-      fetch('http://localhost:9000/.netlify/functions/sendEmail', {
+      fetch('https://boring-brattain-746f09.netlify.com/.netlify/functions/sendEmail', {
         method: 'POST',
         headers: {
           "Access-Control-Allow-Origin" : "*",
