@@ -70,7 +70,7 @@ function sendIdea(event, context, callback) {
   let idea = params["idea"];
   let subject = `Here is a new idea from ${name} at ${email}: ${idea}`;
 
-  sendEmail(name, email, subject, redir());
+  sendEmail(name, email, subject, redir(callback));
 }
 
 //Sends email via AWS SES API.
