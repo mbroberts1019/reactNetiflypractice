@@ -78,6 +78,11 @@ function sendIdea(event, context, callback) {
   let subject = `Here is a new idea from ${name} at ${email}: ${idea}`;
 
   sendEmail(name, email, subject, callback);
+  return {
+    statusCode: 200, // <-- Important!
+    headers,
+    body: 'and then!'
+};
 }
 
 //Sends email via AWS SES API.
