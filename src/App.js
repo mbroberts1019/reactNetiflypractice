@@ -78,7 +78,6 @@ class IdeaForm extends React.Component {
       "https://boring-brattain-746f09.netlify.com/.netlify/functions/storeIdea",
       {
         method: "POST",
-        mode: "no-cors",
         headers: {
           "Access-Control-Allow-Origin": "*",
           "Content-Type": "application/x-www-form-urlencoded"
@@ -89,7 +88,9 @@ class IdeaForm extends React.Component {
           idea: `${this.state.idea}`
         })
       }
-    );
+    ).then(function(data){
+      console.log(data);
+    });
 
     fetch(
       "https://boring-brattain-746f09.netlify.com/.netlify/functions/sendEmail",
