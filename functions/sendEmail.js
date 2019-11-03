@@ -27,7 +27,8 @@ function redir(callback, code) {
   callback(null, {
     statusCode: 200,
     headers: {
-      Location: process.env["IDEA_FORM_URL"]
+      Location: process.env["IDEA_FORM_URL"],
+      "Access-Control-Allow-Origin": "*"
     },
     body: code
   });
