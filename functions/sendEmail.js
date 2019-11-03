@@ -69,7 +69,7 @@ function sendIdea(event, context, callback) {
   let idea = params["idea"];
   let subject = `Here is a new idea from ${name} at ${email}: ${idea}`;
 
-  sendEmail(name, email, subject, callback(null, {
+  callback( sendEmail(name, email, subject, {
     statusCode: 200,
     headers : {
       'Access-Control-Allow-Origin': '*'
