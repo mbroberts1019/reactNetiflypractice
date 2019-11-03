@@ -48,6 +48,18 @@ function sendIdea(event, context, callback) {
       new Error(`Unexpected content type "${event["headers"]["content-type"]}"`)
     );
   }
+  if(event["httpMethod"] === "OPTIONS"){
+    const headers = {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Headers': 'Content-Type',
+      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE'
+    };
+    return {
+      statusCode: 200, // <-- Must be 200 otherwise pre-flight call fails
+      headers,
+      body: 'This was a preflight call!'
+    };
+  }
 
   const params = JSON.parse(event["body"]);
 
