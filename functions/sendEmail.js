@@ -35,10 +35,18 @@ function redir(callback, code) {
 
 //Parses and validates event triggered by question form submission.
 function sendIdea(event, context, callback) {
+  const headers = {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Headers': 'Content-Type',
+    'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE'
+  };
+  
   if (event["httpMethod"] !== "POST") {
-    return callback(
-      new Error(`Unexpected HTTP method "${event["httpMethod"]}"`)
-    );
+    return {
+      statusCode: 200, // <-- Important!
+      headers,
+      body: 'This was not a POST request!'
+  };
   }
   if (
     parseContentType(event["headers"]["content-type"]) !==
@@ -48,13 +56,6 @@ function sendIdea(event, context, callback) {
       new Error(`Unexpected content type "${event["headers"]["content-type"]}"`)
     );
   }
-  if(event["httpMethod"] === "OPTIONS"){
-    const headers = {
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Headers': 'Content-Type',
-      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE'
-    };
-    
 
   const params = JSON.parse(event["body"]);
 
@@ -77,12 +78,6 @@ function sendIdea(event, context, callback) {
   let subject = `Here is a new idea from ${name} at ${email}: ${idea}`;
 
   sendEmail(name, email, subject, callback);
-  return {
-    statusCode: 200, // <-- Must be 200 otherwise pre-flight call fails
-    headers,
-    body: 'This was a preflight call!'
-  };
-}
 }
 
 //Sends email via AWS SES API.
