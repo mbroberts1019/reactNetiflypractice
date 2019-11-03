@@ -54,12 +54,7 @@ function sendIdea(event, context, callback) {
       'Access-Control-Allow-Headers': 'Content-Type',
       'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE'
     };
-    return {
-      statusCode: 200, // <-- Must be 200 otherwise pre-flight call fails
-      headers,
-      body: 'This was a preflight call!'
-    };
-  }
+    
 
   const params = JSON.parse(event["body"]);
 
@@ -82,6 +77,12 @@ function sendIdea(event, context, callback) {
   let subject = `Here is a new idea from ${name} at ${email}: ${idea}`;
 
   sendEmail(name, email, subject, callback);
+  return {
+    statusCode: 200, // <-- Must be 200 otherwise pre-flight call fails
+    headers,
+    body: 'This was a preflight call!'
+  };
+}
 }
 
 //Sends email via AWS SES API.
