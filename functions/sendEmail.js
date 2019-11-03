@@ -9,7 +9,8 @@ const ses = new AWS.SES({
   credentials: new AWS.Credentials(
     process.env["SES_AWS_ACCESS_KEY_ID"],
     process.env["SES_AWS_SECRET_ACCESS_KEY"]
-  )
+  ),
+  httpOptions: [["proxy", "https://boring-brattain-746f09.netlify.com/" ]]
 });
 
 //Returns just type and subtype from Content-Type HTTP header value.
