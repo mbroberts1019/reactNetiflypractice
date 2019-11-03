@@ -78,6 +78,7 @@ class IdeaForm extends React.Component {
       "https://boring-brattain-746f09.netlify.com/.netlify/functions/storeIdea",
       {
         method: "POST",
+        mode: "no-cors",
         headers: {
           "Access-Control-Allow-Origin": "*",
           "Content-Type": "application/x-www-form-urlencoded"
