@@ -4,7 +4,7 @@
   publish = "build" # create-react-app builds to this folder, Netlify should serve all these files statically
 
 [[redirects]]
-  from = "**/*"
+  from = "http:localhost:3000/*"
   to = "/:splat"
   status = 200
   headers = { Access-Control-Allow-Origin = "*"}
