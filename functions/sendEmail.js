@@ -27,7 +27,10 @@ function redir(callback, code) {
   callback(null, {
     statusCode: 200,
     headers: {
-      Location: process.env["IDEA_FORM_URL"]
+      Location: process.env["IDEA_FORM_URL"],
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Headers': 'Content-Type',
+      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE'
     },
     body: code
   });
@@ -78,11 +81,7 @@ function sendIdea(event, context, callback) {
   let subject = `Here is a new idea from ${name} at ${email}: ${idea}`;
 
   sendEmail(name, email, subject, callback);
-  return {
-    statusCode: 200, // <-- Important!
-    headers,
-    body: 'and then!'
-};
+  
 }
 
 //Sends email via AWS SES API.
