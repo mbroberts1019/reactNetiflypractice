@@ -91,7 +91,7 @@ class IdeaForm extends React.Component {
     );
 
     fetch(
-      "/.netlify/functions/sendEmail",
+      "https://boring-brattain-746f09.netlify.com/.netlify/functions/sendEmail",
       {
         method: "POST",
         headers: {

@@ -69,12 +69,7 @@ function sendIdea(event, context, callback) {
   let idea = params["idea"];
   let subject = `Here is a new idea from ${name} at ${email}: ${idea}`;
 
-  callback( sendEmail(name, email, subject, {
-    statusCode: 200,
-    headers : {
-      'Access-Control-Allow-Origin': '*'
-    }
-  }));
+  sendEmail(name, email, subject, callback);
 }
 
 //Sends email via AWS SES API.
