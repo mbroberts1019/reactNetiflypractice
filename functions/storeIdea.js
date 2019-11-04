@@ -23,7 +23,11 @@ function redir(callback, code) {
   callback(null, {
     statusCode: 200,
     headers: {
-      Location: process.env["IDEA_FORM_URL"]
+      //Location: process.env["IDEA_FORM_URL"],
+      'Access-Control-Allow-Credentials': 'true',
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'POST, OPTIONS',
+      'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept',
     },
     body: code
   });
@@ -79,6 +83,7 @@ function sendToDB(event, context, callback) {
   let generatedId = createNewId();
 
   putNewItem(name, email, generatedId, idea, callback);
+  
 }
 
 // Create the DynamoDB service object
