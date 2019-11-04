@@ -48,6 +48,15 @@ function sendIdea(event, context, callback) {
       new Error(`Unexpected content type "${event["headers"]["content-type"]}"`)
     );
   }
+  if (event["httpMethod"] !== "OPTIONS") {
+    return callback(null, {
+      statusCode: 200,
+      headers: {
+        "Access-Control-Allow-Origin": "*"
+      },
+    }
+    );
+  }
 
   const params = JSON.parse(event["body"]);
 

@@ -23,7 +23,7 @@ function redir(callback, code) {
   callback(null, {
     statusCode: 200,
     headers: {
-      Location: process.env["IDEA_FORM_URL"]
+      "Access-Control-Allow-Origin": "*"
     },
     body: code
   });
@@ -42,6 +42,15 @@ function sendToDB(event, context, callback) {
   ) {
     return callback(
       new Error(`Unexpected content type "${event["headers"]["content-type"]}"`)
+    );
+  }
+  if (event["httpMethod"] !== "OPTIONS") {
+    return callback(null, {
+      statusCode: 200,
+      headers: {
+        "Access-Control-Allow-Origin": "*"
+      },
+    }
     );
   }
 
