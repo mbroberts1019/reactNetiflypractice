@@ -44,6 +44,22 @@ function sendToDB(event, context, callback) {
       new Error(`Unexpected content type "${event["headers"]["content-type"]}"`)
     );
   }
+  if (event["httpMethod"] === "OPTIONS") {
+    return callback(null, {
+      statusCode: 204,
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept',
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Methods': '*',
+        'Access-Control-Max-Age': '2592000',
+        'Access-Control-Allow-Credentials': 'true',
+      },
+      
+    }
+      
+    );
+  }
 
   const params = JSON.parse(event["body"]);
 
