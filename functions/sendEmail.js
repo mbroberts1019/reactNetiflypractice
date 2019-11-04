@@ -9,8 +9,7 @@ const ses = new AWS.SES({
   credentials: new AWS.Credentials(
     process.env["SES_AWS_ACCESS_KEY_ID"],
     process.env["SES_AWS_SECRET_ACCESS_KEY"]
-  ),
-  httpOptions: [["proxy", "https://boring-brattain-746f09.netlify.com/" ]]
+  )
 });
 
 //Returns just type and subtype from Content-Type HTTP header value.
@@ -28,10 +27,7 @@ function redir(callback, code) {
   callback(null, {
     statusCode: 200,
     headers: {
-      Location: process.env["IDEA_FORM_URL"],
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Headers': 'Content-Type',
-      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE'
+      "Access-Control-Allow-Origin": "*"
     },
     body: code
   });
@@ -39,18 +35,10 @@ function redir(callback, code) {
 
 //Parses and validates event triggered by question form submission.
 function sendIdea(event, context, callback) {
-  const headers = {
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Headers': 'Content-Type',
-    'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE'
-  };
-  
   if (event["httpMethod"] !== "POST") {
-    return {
-      statusCode: 200, // <-- Important!
-      headers,
-      body: 'This was not a POST request!'
-  };
+    return callback(
+      new Error(`Unexpected HTTP method "${event["httpMethod"]}"`)
+    );
   }
   if (
     parseContentType(event["headers"]["content-type"]) !==
@@ -82,7 +70,6 @@ function sendIdea(event, context, callback) {
   let subject = `Here is a new idea from ${name} at ${email}: ${idea}`;
 
   sendEmail(name, email, subject, callback);
-  
 }
 
 //Sends email via AWS SES API.

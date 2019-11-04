@@ -88,9 +88,7 @@ class IdeaForm extends React.Component {
           idea: `${this.state.idea}`
         })
       }
-    ).then(function(data){
-      console.log(data);
-    });
+    );
 
     fetch(
       "https://boring-brattain-746f09.netlify.com/.netlify/functions/sendEmail",
