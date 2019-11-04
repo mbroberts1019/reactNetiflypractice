@@ -79,7 +79,6 @@ class IdeaForm extends React.Component {
       {
         method: "POST",
         headers: {
-          "Access-Control-Allow-Origin": "*",
           "Content-Type": "application/x-www-form-urlencoded"
         },
         body: JSON.stringify({
@@ -95,7 +94,6 @@ class IdeaForm extends React.Component {
       {
         method: "POST",
         headers: {
-          "Access-Control-Allow-Origin": "*",
           "Content-Type": "application/x-www-form-urlencoded"
         },
         body: JSON.stringify({

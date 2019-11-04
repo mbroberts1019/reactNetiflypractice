@@ -36,6 +36,9 @@ function sendToDB(event, context, callback) {
       statusCode: 204,
       headers: {
         'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept',
+        'Access-Control-Allow-Methods': 'POST, OPTIONS',
+        'Access-Control-Allow-Credentials': 'true',
       }, 
     }  
     );
