@@ -17,9 +17,9 @@ app.use('/.netlify/functions/recaptchaCheck', router);
 const secretKey = process.env["RECAPTCHA_SECRET_KEY"];
 console.log("HIT secret key");
 
-router.post("/", (req,res)=>{
+router.post("/", async (req,res)=>{
     console.log("HIT /form");
-    console.log("Req.body: ", req.body);
+    console.log("Req.body: ", req.body); /// working to this point
     if(
         req.body.captcha === undefined ||
         req.body.captcha === '' ||
@@ -30,7 +30,7 @@ router.post("/", (req,res)=>{
     //verify url
     const verifyURL = `https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${req.body.captcha}`;
 
-    request(verifyURL, (err, response, body) => {
+    await request(verifyURL, (err, response, body) => {
         if(err){
             console.error(err);
         }
