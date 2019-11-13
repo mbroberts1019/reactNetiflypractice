@@ -34,6 +34,7 @@ router.post("/", (req,res)=>{
         if(body.sucess !== undefined && !body.sucess){
             return res.json({'sucess': false, 'msg': 'please select recaptcha'});
         }
+        console.log(body.sucess)
         return res.json({'sucess': true, 'msg': 'captcha passed'});
     });
 
