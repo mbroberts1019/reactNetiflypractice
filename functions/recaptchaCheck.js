@@ -19,6 +19,7 @@ console.log("HIT secret key");
 
 router.post("/", (req,res)=>{
     console.log("HIT /form");
+    console.log("Req.body: ", req.body);
     if(
         req.body.captcha === undefined ||
         req.body.captcha === '' ||
@@ -30,11 +31,15 @@ router.post("/", (req,res)=>{
     const verifyURL = `https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${req.body.captcha}`;
 
     request(verifyURL, (err, response, body) => {
+        if(err){
+            console.error(err);
+        }
+
         // if not sucessful
         if(body.sucess !== undefined && !body.sucess){
             return res.json({'sucess': false, 'msg': 'please select recaptcha'});
         }
-        console.log(body.sucess)
+        console.log(body.sucess);
         return res.json({'sucess': true, 'msg': 'captcha passed'});
     });
 
