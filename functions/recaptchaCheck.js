@@ -13,7 +13,7 @@ const recaptchaCheck = async (event, context) => {
     let googleRecaptchaApiURL = `https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${token}`;
     console.log("Token => ", token);
     console.log("URl => ", googleRecaptchaApiURL);
-    return fetch(googleRecaptchaApiURL, { headers: { "Accept": "application/json" } })
+    return fetch(googleRecaptchaApiURL)
         .then(response => response.json())
         .then(data => ({
             statusCode: 200,
