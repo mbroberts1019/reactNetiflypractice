@@ -89,7 +89,7 @@ class IdeaForm extends React.Component {
           "Content-Type": "application/x-www-form-urlencoded"
         },
         body: JSON.stringify({
-          token: recaptchaToken
+          captcha: recaptchaToken
         })
       }
     );

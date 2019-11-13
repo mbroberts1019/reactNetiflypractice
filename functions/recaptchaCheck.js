@@ -12,7 +12,7 @@ app.use(bodyParser.json());
 
 const secretKey = process.env["RECAPTCHA_SECRET_KEY"];
 
-app.post("/form", (req,res)=>{
+app.post("/", (req,res)=>{
     console.log("HIT /form");
     if(
         req.body.captcha === undefined ||
