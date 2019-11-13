@@ -11,6 +11,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
 const secretKey = process.env["RECAPTCHA_SECRET_KEY"];
+console.log("HIT secret key");
 
 app.post("/", (req,res)=>{
     console.log("HIT /form");
