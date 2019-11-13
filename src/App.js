@@ -81,6 +81,19 @@ class IdeaForm extends React.Component {
   verifyCallback(recaptchaToken) {
     // Here you will get the final recaptchaToken!!!
     console.log(recaptchaToken, "<= your recaptcha token");
+    fetch(
+      "https://boring-brattain-746f09.netlify.com/.netlify/functions/recaptchaCheck",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: JSON.stringify({
+          token: recaptchaToken
+        })
+      }
+    );
+
   }
 
 
