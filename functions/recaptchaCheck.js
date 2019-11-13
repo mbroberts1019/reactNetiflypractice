@@ -1,26 +1,48 @@
 // jshint esversion: 6
-const fetch = require("node-fetch");
-
+const express = require('express');
+const serverless = require('serverless-http');
+const request = require('request');
+const app = express();
+const bodyParser = require('body-parser');
 const dotenv = require("dotenv");
 const env = dotenv.config().parsed;
 
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
+
 const secretKey = process.env["RECAPTCHA_SECRET_KEY"];
 
-const recaptchaCheck = async (event, context) => {
+app.post("/form", (req,res)=>{
+    if(
+        req.body.captcha === undefined ||
+        req.body.captcha === '' ||
+        req.body.captcha === null
+    ){
+        return res.json({'sucess': false, 'msg': 'please select recaptcha'});
+    }
+    //verify url
+    const verifyURL = `https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${req.body.captcha}`;
 
-    const params = JSON.parse(event["body"]);
-    let token = params["token"];
-    let googleRecaptchaApiURL = `https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${token}`;
-    console.log("Token => ", token);
-    console.log("URl => ", googleRecaptchaApiURL);
-    return fetch(googleRecaptchaApiURL, { method: "POST" , headers: { "Content-Type": "application/x-www-form-urlencoded" } })
-        .then(response => response.json())
-        .then(data => ({
-            statusCode: 200,
-            body: data
-        }))
-        .catch(error => ({ statusCode: 422, body: String(error) }));
-};
+    request(verifyURL, (err, response, body) => {
+        // if not sucessful
+        if(body.sucess !== undefined && !body.sucess){
+            return res.json({'sucess': false, 'msg': 'please select recaptcha'});
+        }
+        return res.json({'sucess': true, 'msg': 'captcha passed'});
+    });
 
-exports.handler = recaptchaCheck;
+
+});
+// function updateDatabase(data) {
+//   ... // update the database
+//   return newValue;
+// }
+
+// app.use(bodyParser);
+// app.post('/updatestate', (res, req) => {
+//   const newValue = updateDatabase(res.body);
+//   req.json(newValue);
+// });
+
+module.exports.handler = serverless(app);
 
