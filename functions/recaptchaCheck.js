@@ -10,10 +10,14 @@ const env = dotenv.config().parsed;
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
+const router = express.Router()
+
+app.use('/.netlify/functions/recaptchaCheck', router);
+
 const secretKey = process.env["RECAPTCHA_SECRET_KEY"];
 console.log("HIT secret key");
 
-app.post("/", (req,res)=>{
+router.post("/", (req,res)=>{
     console.log("HIT /form");
     if(
         req.body.captcha === undefined ||
