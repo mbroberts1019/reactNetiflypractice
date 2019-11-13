@@ -1,4 +1,6 @@
 // jshint esversion: 6
+const fetch = require("node-fetch");
+
 const dotenv = require("dotenv");
 const env = dotenv.config().parsed;
 
